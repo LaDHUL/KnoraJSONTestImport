@@ -25,9 +25,11 @@ Must contain one folder per class and one file per object. Folders and files are
 ```json
 {
         "link_value":
-          "<%00.Image/002.json%>"  (will be replaced by the IRI of the created object of file 00.Image/002.json)
+          "<%00.Image/002.json%>"
 }
 ```
+
+`<%00.Image/002.json%>` will be replaced by the IRI of the created object of file 00.Image/002.json.
 
 To associate an image (stored in Sipi) to an object (subclass of StillImageRepresentation), image file must have the same name of the object file (supported extensions: .png and .jpg).
 
