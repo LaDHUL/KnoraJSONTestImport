@@ -6,7 +6,9 @@ The provided python script allows you to import JSON test data to Knora. JSON fi
 
 `./ImportData.py <config.json> <data_folder>`
 
-## config.json example
+## Config
+
+config.json example:
 
 ```json
 {
@@ -18,16 +20,16 @@ The provided python script allows you to import JSON test data to Knora. JSON fi
 
 ## Data folder
 
-Must contains one folder per class and one file per object. Folders and files are sorted in alphanumeric order to order import and to prevent object dependencies. IRI "link_value" will be resolved during import, set dependency to other objects as follow:
+Must contain one folder per class and one file per object. Folders and files are scanned in alphanumeric order to provide object dependencies order. IRI "link_value" will be resolved during import, set dependency to other objects as follow:
 
 ```json
 {
         "link_value":
-          "<%00.Image/002.json%>"
+          "<%00.Image/002.json%>"  (will be replaced by the IRI of the created object of file 00.Image/002.json)
 }
 ```
 
-To associate an image to an object (StillImageRepresentation), image file must have the same name of the object file (supported extensions: .png and .jpg).
+To associate an image (stored in Sipi) to an object (subclass of StillImageRepresentation), image file must have the same name of the object file (supported extensions: .png and .jpg).
 
 Data folder example (for LL ontology)
 
