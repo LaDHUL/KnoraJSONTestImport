@@ -1,0 +1,49 @@
+{
+  "restype_id":
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#FreeContent",
+  "properties": {
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#webContentHasTitle": [
+      {
+        "richtext_value": {
+          "utf8str": "Bienvenue sur le site Lumières.Lausanne"
+        }
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#freeContentHasName": [
+      {
+        "richtext_value": {
+          "utf8str": "home"
+        }
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasDiffusionType": [
+      {
+        "boolean_value": true
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#contentHasAuthor": [
+      {
+        "richtext_value": {
+          "utf8str": "Beatrice Lovis"
+        }
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasAdditionalResource": [
+      {
+        "link_value":
+          "<%00.Image/001.json%>"
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasContent": [
+      {
+        "richtext_value": {
+          "xml":
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<text><p>Lumières.Lausanne est une plateforme qui met à la disposition des chercheurs et de toute personne intéressée par le riche passé culturel de la Suisse francophone à l'époque des Lumières des sources inédites, de la littérature secondaire et des fiches biographiques sur des personnalités qui l’ont marqué (<a href=\"http://lumieres.unil.ch/chercher/bibliographie/\">lien vers la recherche avancée</a>). Cet instrument de recherche est également un support de publication et un outil d'enseignement académique.</p><p>31 MAI 2017: L’équipe de Lumières.Lausanne a eu le plaisir de présenter l'avancée de divers projets rattachés à la plateforme lors de son événement <a href=\"http://lumieres.unil.ch/actualites/99/\">« Le Pays de Vaud au cœur des débats européens: des archives au numérique »</a>. De nouveaux documents ont été mis en ligne pour cet événement (<a href=\"http://lumieres.unil.ch/media/files/2017/04/Flyer_Lumieres.Lausanne_31.05.2017_web.pdf\">→ Programme</a>).</p></text>",
+          "mapping_id": "http://rdfh.ch/standoff/mappings/StandardMapping"
+        }
+      }
+    ]
+  },
+  "project_id": "http://rdfh.ch/projects/0113",
+  "label": "home"
+}

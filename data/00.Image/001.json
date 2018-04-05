@@ -1,0 +1,21 @@
+{
+    "restype_id": "http://www.knora.org/ontology/0113/lumieres-lausanne#Image",
+    "properties": {
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasDiffusionType": [{
+            "boolean_value": true
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasReference": [{
+            "uri_value": "http://lumieres.unil.ch/actualites/99/"
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasCaption": [{
+            "richtext_value": {
+                "utf8str": "Evénement « Le Pays de Vaud au cœur des débats européens : des archives au numérique », 31 mai 2017"
+            }
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasSequenceNumber": [{
+            "int_value": 1
+        }]
+    },
+    "project_id": "http://rdfh.ch/projects/0113",
+    "label": "MHL122991_-_copie.jpg"
+}
