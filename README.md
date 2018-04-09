@@ -1,6 +1,25 @@
 # KnoraJSONTestImport
 
-The provided python (v3) script allows you to import JSON test data to Knora. JSON file content must follow the content required by the Knora API (POST v1/resources endpoint).
+The provided python script allows you to import JSON test data to Knora. JSON file content must follow the content required by the Knora API (POST v1/resources endpoint).
+
+## Python 3 + requests
+
+Create env for python3 if default python version is python2 and install requests package:
+
+```unix
+$ python --version
+Python 2.7.10
+$ python3 --version
+Python 3.6.4
+$ python3 -m venv python3-env
+$ source python3-env/bin/activate
+$ python --version
+Python 3.6.4
+$ pip install requests
+$ ./ImportData.py
+Usage: ./ImportData.py <config.json> <data_folder>
+$ deactivate
+```
 
 ## Usage
 
@@ -46,7 +65,7 @@ data
 
 ## Test
 
-```shell
+```unix
 $ ./ImportData.py config.json data/
 
 - Load config file: /Users/gfaucher/work/projects/lumieres/LL2018/data-test/config.json
