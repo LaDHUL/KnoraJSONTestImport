@@ -62,7 +62,8 @@ for folder in sorted(folders):
         filenames.append(f)
   for filename in sorted(filenames):
     fullpath = data_folder+"/"+folder
-    if filename.split('.')[1] == 'json':
+    basefilename, file_extension = os.path.splitext(filename)
+    if file_extension == '.json':
       print("")
       print("   -> "+filename)
       with open(fullpath+"/"+filename, 'r') as fp:
@@ -77,9 +78,9 @@ for folder in sorted(folders):
             print("   -> resolved link "+link+" into "+linked_iri)
             file_content = file_content.replace('<%'+link+'%>',linked_iri)
         json_obj = json.loads(file_content)
-        img_file_png = filename.split('.')[0]+'.png'
+        img_file_png = basefilename+'.png'
         full_img_file_png = os.path.abspath(fullpath+"/"+img_file_png)
-        img_file_jpg = filename.split('.')[0]+'.jpg'
+        img_file_jpg = basefilename+'.jpg'
         full_img_file_jpg = os.path.abspath(fullpath+"/"+img_file_jpg)
         if os.path.isfile(full_img_file_png):
           file = {
