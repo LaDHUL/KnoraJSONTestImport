@@ -99,7 +99,7 @@ def scanFiles(folder, extension):
         if file_extension == "."+extension:
             img_file, img_type = findImageFile(folder, basefilename)
             json_files.append([full_f, img_file, img_type])
-    return sorted(json_files,key=lambda tup: tup[0])
+    return sorted(json_files, key=lambda tup: tup[0])
 
 
 def resolveLinks(content, link_resolver):
@@ -197,6 +197,21 @@ if not url or not email or not password:
 print("   * url=%s email=%s password=%s" % (url, email, password))
 
 print("")
+print("- Check user/password")
+r = requests.post(
+    url+"/v2/authentication",
+    json={
+        "email": email,
+        "password": password
+    })
+
+if not r.ok:
+    print("*** ERROR ***")
+    print(r)
+    print(r.text)
+    sys.exit(1)
+
+print("")
 print("- Create data source from data list: "+data_list)
 
 data_source = createDataSourceList(os.path.abspath(data_list))
@@ -212,12 +227,13 @@ nb_objs_updated = 0
 nb_images = 0
 
 for data in data_source.data_list:
-    count+=1
+    count += 1
     print("")
     if data.import_type == IMPORT_TYPE.CREATE:
         print("\t-> %s/%s Create %s" % (count, nb_ops, data.key))
         if data.image_filename:
-            print("\t\t-> Related image : %s %s" % (data.image_type,data.image_filename))        
+            print("\t\t-> Related image : %s %s" %
+                  (data.image_type, data.image_filename))
             nb_images += 1
         iri = createData(url, email, password, data, link_resolver)
         print("\t\t-> IRI: %s" % iri)
