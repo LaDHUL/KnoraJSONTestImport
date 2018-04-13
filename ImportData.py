@@ -8,12 +8,16 @@ import re
 import sys
 import time
 
-if len(sys.argv) != 3:
-  print("Usage: "+sys.argv[0]+" <config.json> <data_folder>")
+if len(sys.argv) < 3:
+  print("Usage: "+sys.argv[0]+" <config.json> <data_folder> [<include_pattern>]")
   sys.exit(1)
 
 config_file = os.path.abspath(sys.argv[1])
 data_folder = os.path.abspath(sys.argv[2])
+include_pattern = None
+if len(sys.argv) >= 4:
+  include_pattern = sys.argv[3]
+
 
 start = time.time()
 print("")
@@ -45,6 +49,10 @@ print("   * token: %s" % token)
 print("")
 print("- Send data from folder "+data_folder)
 
+if include_pattern:
+  print("")
+  print(" => PATTERN FILTERING: "+include_pattern)
+
 res_dict = {}
 folders=[]
 nb_objs=0
@@ -61,6 +69,10 @@ for folder in sorted(folders):
       for f in files:
         filenames.append(f)
   for filename in sorted(filenames):
+    if include_pattern and not re.match(include_pattern,filename):
+      print("")
+      print("   -> PATTERN IGNORE: "+filename)
+      continue
     fullpath = data_folder+"/"+folder
     basefilename, file_extension = os.path.splitext(filename)
     if file_extension == '.json':
