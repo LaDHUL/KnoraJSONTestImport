@@ -1,0 +1,21 @@
+{
+    "restype_id": "http://www.knora.org/ontology/0113/lumieres-lausanne#Image",
+    "properties": {
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasDiffusionType": [{
+            "boolean_value": true
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasReference": [{
+            "uri_value": "http://lumieres.unil.ch/publications/trouvailles/5/"
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasCaption": [{
+            "richtext_value": {
+                "utf8str": "De l’astronome à l’agronome: le château de Cheseaux et ses propriétaires au XVIIIe siècle"
+            }
+        }],
+        "http://www.knora.org/ontology/0113/lumieres-lausanne#hasSequenceNumber": [{
+            "int_value": 2
+        }]
+    },
+    "project_id": "http://rdfh.ch/projects/0113",
+    "label": "Trouvaille_LL_5_Luca_Delachaux_accueil.jpg"
+}

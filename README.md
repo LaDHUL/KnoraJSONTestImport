@@ -1,33 +1,31 @@
 # KnoraJSONTestImport
 
-The provided python script allows you to import JSON test data to Knora. JSON file content must follow the content required by the Knora API (POST v1/resources endpoint).
+The provided python script allows you to import JSON test data to Knora. JSON file content must follow the content required by the Knora API (POST v1/resources and v1/values endpoints).
 
-## Python 3 + requests
+## Requirements: Python 3 + requests
 
-Create env for python3 if default python version is python2 and install requests package:
+A clean and stable way is to create an env for python3 with required packages:
 
 ```unix
-$ python --version
-Python 2.7.10
-$ python3 --version
-Python 3.6.4
 $ python3 -m venv python3-env
 $ source python3-env/bin/activate
 $ python --version
 Python 3.6.4
 $ pip install requests
 $ ./ImportData.py
-Usage: ./ImportData.py <config.json> <data_folder>
+Usage: ImportData.py <connection.json> <data.list>
 $ deactivate
 ```
 
 ## Usage
 
-`./ImportData.py <config.json> <data_folder>`
+You need to provide a connection file and data description file:
 
-## Config
+`Usage: ImportData.py <connection.json> <data.list>`
 
-config.json example:
+### Connection file
+
+connection.json example:
 
 ```json
 {
@@ -37,59 +35,99 @@ config.json example:
 }
 ```
 
-## Data folder
+### Data description file
 
-Must contain one folder per class and one file per object. Folders and files are scanned in alphanumeric order to provide object dependencies order. IRI `link_value` will be resolved during import, set dependency to other objects as follow:
+The data file must describe operations (CREATE or UPDATE) to launch in 
+the specified order (empty or # lines will be ignored):
 
 ```json
-{
+# Data list for LL model test
+
+CREATE Image
+CREATE FreeContent
+UPDATE FreeContent_Image
+```
+
+The first term provides the operation, the second one is the folder containing 
+json data files to use (filenames are loaded using alphanumeric order).
+The folder path must be relative to the data.file location.
+
+To set a `link_value`, you can use resolver during import, set dependency to 
+other objects as follow:
+
+See in `FreeContent/home.json`:
+```json
+"http://www.knora.org/ontology/0113/lumieres-lausanne#hasAdditionalResource": [
+      {
         "link_value":
-          "<%00.Image/002.json%>"
+          "<%Image/MHL122991_-_copie.json%>"
+      }
+    ],
+```
+`<%Image/MHL122991_-_copie.json%>` will be replaced by the IRI of the previously 
+created object of file `MHL122991_-_copie.json`.
+
+Same way to update a link and find the current object to update (`"res_id"`), 
+see in `FreContent_Image/home_update.json`:
+```json
+{
+  "link_value": "<%Image/Trouvaille_LL_5_Luca_Delachaux_accueil.json%>",
+  "res_id": "<%FreeContent/home.json%>",
+  "prop":
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasAdditionalResource",
+  "project_id": "http://rdfh.ch/projects/0113"
 }
 ```
 
-`<%00.Image/002.json%>` will be replaced by the IRI of the created object of file `00.Image/002.json`.
-
-To associate an image (stored in Sipi) to an object (subclass of `StillImageRepresentation`), image file must have the same name of the object file (supported extensions: .png and .jpg).
+To associate an image (will be store in Sipi) to an object (subclass of
+`StillImageRepresentation`), the image file must have the same name of the
+object file (supported extensions: .png and .jpg).
 
 Data folder example of LL ontology:
 
 ```unix
-data
-├── 00.Image          (Image class folder)
-│   ├── 001.jpg       (Image related to data of 001.json)
-│   ├── 001.json      (Image data of an object)
-└── 01.FreeContent    (FreeContent class folder)
-    └── 001.json      (FreeContent data of an object)
+── FreeContent
+│   └── home.json
+├── FreeContent_Image
+│   └── home.json
+├── Image
+│   ├── MHL122991_-_copie.jpg
+│   ├── MHL122991_-_copie.json
+│   ├── Trouvaille_LL_5_Luca_Delachaux_accueil.jpg
+│   └── Trouvaille_LL_5_Luca_Delachaux_accueil.json
+└── data.list
 ```
 
 ## Test
 
+Having a Knora stack correctly configured for Lumières.Lausanne project:
+
 ```unix
-$ ./ImportData.py config.json data/
+$ ./ImportData.py connection.json data/data.list
 
-- Load config file: /Users/gfaucher/work/projects/lumieres/LL2018/data-test/config.json
-   * url: http://0.0.0.0:3333/
-   * email: xxxxx
-   * password: xxxxx
+- Load config file: /Users/gfaucher/work/projects/lumieres/LL2018/data-test/connection.json
+   * url=http://0.0.0.0:3333 email=lumieres@unil.ch password=test
 
-- Login
-   * token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWJhcGkiLCJzdWIiOiJodHRwOi8vcmRmaC5jaC91c2Vycy9yb290IiwiYXVkIjoid2ViYXBpIiwiaWF0IjoxNTIyOTQ3MTY4LCJleHAiOjE1MjU1MzkxNjgsImp0aSI6IjkzMWJiMzc3LWQ1MGMtNDlmOS05YTA0LWM2NTI1YzE3ZmI0NyJ9.yvydSIYpeIFXHEnyrBB5qMOgMVaCBZqAv2b6tPHr2es
+- Create data source from data list: /Users/gfaucher/work/projects/lumieres/KnoraJSONTestImport/data/data.list
 
-- Send data from folder /Users/gfaucher/work/projects/lumieres/KnoraJSONTestImport/data
+- Load data source (nb operations: 4)
 
- => 00.Image
+	-> 1/4 Create Image/MHL122991_-_copie.json
+		-> Related image : image/jpeg /Users/gfaucher/work/projects/lumieres/KnoraJSONTestImport/data/Image/MHL122991_-_copie.jpg
+		-> IRI: http://rdfh.ch/0113/lumieres-lausanne/U0lbpjj4RIGs3JAEveK2ug
 
-   -> 001.json
-   -> related image /Users/gfaucher/work/projects/lumieres/KnoraJSONTestImport/data/00.Image/001.jpg
-   -> <Response [200]> | Created object 00.Image/001.json iri=http://rdfh.ch/0113/lumieres-lausanne/2n2YGPe7QGCbhTtn_WUVjQ
+	-> 2/4 Create Image/Trouvaille_LL_5_Luca_Delachaux_accueil.json
+		-> Related image : image/jpeg /Users/gfaucher/work/projects/lumieres/KnoraJSONTestImport/data/Image/Trouvaille_LL_5_Luca_Delachaux_accueil.jpg
+		-> IRI: http://rdfh.ch/0113/lumieres-lausanne/voVKvBE1THys--vqgTMgew
 
- => 01.FreeContent
+	-> 3/4 Create FreeContent/home.json
+		-> resolved link Image/MHL122991_-_copie.json into http://rdfh.ch/0113/lumieres-lausanne/U0lbpjj4RIGs3JAEveK2ug
+		-> IRI: http://rdfh.ch/0113/lumieres-lausanne/WMDKmCj0SzuKMfIrDrW7mg
 
-   -> 001.json
-   -> resolved link 00.Image/001.json into http://rdfh.ch/0113/lumieres-lausanne/2n2YGPe7QGCbhTtn_WUVjQ
-   -> <Response [200]> | Created object 01.FreeContent/001.json iri=http://rdfh.ch/0113/lumieres-lausanne/q4jex-SLREqZB7eJCFEWig
+	-> 4/4 Update FreeContent_Image/home_update.json
+		-> resolved link Image/Trouvaille_LL_5_Luca_Delachaux_accueil.json into http://rdfh.ch/0113/lumieres-lausanne/voVKvBE1THys--vqgTMgew
+		-> resolved link FreeContent/home.json into http://rdfh.ch/0113/lumieres-lausanne/WMDKmCj0SzuKMfIrDrW7mg
 
-- Done: created 2 objects and added 1 images [1.3345389366149902 s]
+- Done: created 3 and updated 1 objects, added 2 images [3.035555839538574 s]
 
 ```

@@ -1,0 +1,7 @@
+{
+  "link_value": "<%Image/Trouvaille_LL_5_Luca_Delachaux_accueil.json%>",
+  "res_id": "<%FreeContent/home.json%>",
+  "prop":
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasAdditionalResource",
+  "project_id": "http://rdfh.ch/projects/0113"
+}
