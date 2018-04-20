@@ -3,3 +3,4 @@
 CREATE Image
 CREATE FreeContent
 UPDATE FreeContent_Image
+CREATE User

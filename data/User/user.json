@@ -1,0 +1,12 @@
+{
+  "restype_id": "http://www.knora.org/ontology/0113/lumieres-lausanne#User",
+  "properties": {
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#isKnoraUser": [
+      {
+        "uri_value": "http://rdfh.ch/users/9XBCrDV3SRa7kS1WwynB4Q"
+      }
+    ]
+  },
+  "project_id": "http://rdfh.ch/projects/0113",
+  "label": "anything1"
+}
