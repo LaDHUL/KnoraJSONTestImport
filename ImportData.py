@@ -59,7 +59,7 @@ def loadConfig(config_file):
         config_json = json.load(f)
         for key in config_json:
             if key == "url":
-                url = config_json[key]
+                url = config_json[key].strip('/')
             if key == "email":
                 email = config_json[key]
             if key == "password":
