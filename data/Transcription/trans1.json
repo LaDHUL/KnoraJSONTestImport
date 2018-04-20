@@ -1,0 +1,39 @@
+{
+  "restype_id":
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#Transcription",
+  "properties": {
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasOldId": [
+      {
+        "richtext_value": {
+          "utf8str":
+            "169"
+        }
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasDiffusionType": [
+      { "boolean_value": true }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasStatus": [
+      { "hlist_value": "http://rdfh.ch/lists/0113/bd734981af01" }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasScope": [
+      { "hlist_value": "http://rdfh.ch/lists/0113/f3daeff3af01" }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#transcriptionHasText": [
+      {
+        "richtext_value": {
+          "xml":
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<text><p>de besançon ce 28<sup>e</sup> 8<sup>bre</sup> 1731</p><p>je suis icy depuis le 20 du mois mon cher amyet des ce jour meme javois fait marche avec le voiturinqui se mena a paris pour me mener a lausanne maisquelques heures après la fievre qui ne m’avoit gueresquitte depuis deus mois me prit plus fort que jamaisjavois la ratte enflée enfin jetois en pitoyable etatun medecin anglois ma entrepris et je suis fort bien al’heure qu’il est mande moy si je puis sans t'incommo=der aller passer avec toy quelque mois je suis libre jusquesau mois d’avril de la sincerite et reponds moy vite</p><p>adieu mirabeau</p><p>joffre mes respects a qui il appartient</p></text>",
+          "mapping_id": "http://rdfh.ch/standoff/mappings/StandardMapping"
+        }
+      }
+    ],
+    "http://www.knora.org/ontology/0113/lumieres-lausanne#hasReviewer": [
+			{
+				"link_value": "<%User/user.json%>"
+			}
+		]
+  },
+  "project_id": "http://rdfh.ch/projects/0113",
+  "label": "Sans titre [Lettre à Marc Charles Frédéric de Sacconay, 28 octobre 1731]"
+}
